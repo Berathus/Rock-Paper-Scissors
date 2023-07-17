@@ -25,12 +25,32 @@ function getComputerChoice() {
   
   
   
-  const playerSelection = prompt("Rock, Paper, Scissors?");
-  const computerSelection = getComputerChoice();
-  
-  function game() {
-    console.log(gameRound(playerSelection, computerSelection));
+  function game(rounds) {
+    let playerWins = 0;
+    let computerWins = 0;
+
+    for(let i = 1; i <= rounds; i++) {
+      const playerSelection = prompt(`Round ${i}, Rock, Paper, Scissors?`);
+      const computerSelection = getComputerChoice();
+      const result = gameRound(playerSelection, computerSelection);
+
+      console.log(result);
+
+      if (result.startsWith("You win")) {
+        playerWins++;
+      } else if (result.startsWith("You lose")) {
+        computerWins++; 
+      }
+    }
+
+    if (playerWins > computerWins) {
+      console.log("Congratulations, you are the winner");
+    } else if (playerWins < computerWins) {
+      console.log("You have lost the game");
+    } else {
+      console.log("It's a draw. No one won the game");
+    }
   }
   
-  console.log(game());
+  game(5);
   
